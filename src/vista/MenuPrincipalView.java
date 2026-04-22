@@ -32,8 +32,10 @@ public class MenuPrincipalView extends JFrame {
     private JButton btnHistorial;
     private JButton btnOperadores;
     private JButton btnEstadisticas;
-    private JButton btnSalir;
     private JButton btnUsuarios;
+    private JButton btnPresupuesto;
+    private JButton btnAnalisisPresupuesto;
+    private JButton btnSalir;
 
     public MenuPrincipalView() {
         configurarVentana();
@@ -85,9 +87,10 @@ public class MenuPrincipalView extends JFrame {
         panelLateral.setBackground(fondoOscuro);
         panelLateral.setPreferredSize(new Dimension(240, 650));
         panelLateral.setBorder(BorderFactory.createEmptyBorder(22, 20, 22, 20));
+       
 
         // Panel de botones superiores
-        panelBotones = new JPanel(new GridLayout(5, 1, 0, 18));
+        panelBotones = new JPanel(new GridLayout(7, 1, 0, 14));
         panelBotones.setBackground(fondoOscuro);
 
         btnRegistro = crearBoton("REGISTRO DE PRUEBA");
@@ -95,6 +98,8 @@ public class MenuPrincipalView extends JFrame {
         btnOperadores = crearBoton("OPERADORES");
         btnEstadisticas = crearBoton("ESTADÍSTICAS");
         btnUsuarios = crearBoton("USUARIOS");
+        btnPresupuesto = crearBoton("PRESUPUESTO");
+        btnAnalisisPresupuesto = crearBoton("ANÁLISIS PRESUPUESTO");
 
         // Panel de salir
         panelSalir = new JPanel(new BorderLayout());
@@ -133,11 +138,14 @@ public class MenuPrincipalView extends JFrame {
         panelBotones.add(btnOperadores);
         panelBotones.add(btnEstadisticas);
         panelBotones.add(btnUsuarios);
+        panelBotones.add(btnPresupuesto);
+        panelBotones.add(btnAnalisisPresupuesto);
 
         panelSalir.add(btnSalir, BorderLayout.SOUTH);
 
         panelLateral.add(panelBotones, BorderLayout.NORTH);
         panelLateral.add(panelSalir, BorderLayout.SOUTH);
+      
 
         panelContenido.add(lblBienvenida, BorderLayout.CENTER);
 
@@ -188,18 +196,24 @@ public class MenuPrincipalView extends JFrame {
             btnOperadores.setVisible(true);
             btnEstadisticas.setVisible(true);
             btnUsuarios.setVisible(true);
+            btnPresupuesto.setVisible(true);
+            btnAnalisisPresupuesto.setVisible(true);
         } else if (rol.equalsIgnoreCase("Operador")) {
             btnRegistro.setVisible(true);
             btnHistorial.setVisible(true);
             btnOperadores.setVisible(false);
-            btnEstadisticas.setVisible(false);
+            btnEstadisticas.setVisible(true);
             btnUsuarios.setVisible(false);
+            btnPresupuesto.setVisible(false);
+            btnAnalisisPresupuesto.setVisible(false);
         } else {
             btnRegistro.setVisible(true);
             btnHistorial.setVisible(false);
             btnOperadores.setVisible(false);
             btnEstadisticas.setVisible(false);
             btnUsuarios.setVisible(false);
+            btnPresupuesto.setVisible(false);
+            btnAnalisisPresupuesto.setVisible(false);
         }
 
         panelLateral.revalidate();
@@ -245,4 +259,14 @@ public class MenuPrincipalView extends JFrame {
     public JButton getBtnUsuarios() {
         return btnUsuarios;
     }
+    
+    public JButton getBtnPresupuesto() {
+        return btnPresupuesto;
+    }
+    
+    public JButton getBtnAnalisisPresupuesto() {
+        return btnAnalisisPresupuesto;
+    }
+    
+    
 }

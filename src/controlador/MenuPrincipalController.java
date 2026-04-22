@@ -1,6 +1,7 @@
 package controlador;
 
 import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +14,10 @@ import vista.PanelEstadisticas;
 import vista.PanelOperadores;
 import vista.LoginView;
 import vista.PanelUsuarios;
+import vista.PanelPresupuesto;
+import controlador.PresupuestoController;
+import vista.PanelAnalisisPresupuesto;
+
 
 
 
@@ -29,6 +34,8 @@ public class MenuPrincipalController implements ActionListener {
         this.vista.getBtnSalir().addActionListener(this);
         this.vista.getBtnOperadores().addActionListener(this);
         this.vista.getBtnUsuarios().addActionListener(this);
+        this.vista.getBtnPresupuesto().addActionListener(this);
+        this.vista.getBtnAnalisisPresupuesto().addActionListener(this);
     }
 
     public void iniciarVista() {
@@ -115,6 +122,28 @@ public class MenuPrincipalController implements ActionListener {
             vista.getPanelContenido().repaint();
 
             usuarioController.cargarUsuarios();
+        }
+        
+        if (e.getSource() == vista.getBtnPresupuesto()) {
+            PanelPresupuesto panelPresupuesto = new PanelPresupuesto(vista);
+            new PresupuestoController(panelPresupuesto);
+
+            vista.getPanelContenido().removeAll();
+            vista.getPanelContenido().add(panelPresupuesto, BorderLayout.CENTER);
+            vista.getPanelContenido().revalidate();
+            vista.getPanelContenido().repaint();
+        }
+        
+        if (e.getSource() == vista.getBtnAnalisisPresupuesto()) {
+            PanelAnalisisPresupuesto panelAnalisis = new PanelAnalisisPresupuesto(vista);
+            AnalisisPresupuestoController controller = new AnalisisPresupuestoController(panelAnalisis);
+
+            vista.getPanelContenido().removeAll();
+            vista.getPanelContenido().add(panelAnalisis, BorderLayout.CENTER);
+            vista.getPanelContenido().revalidate();
+            vista.getPanelContenido().repaint();
+
+            controller.cargarAnalisis();
         }
     }
 }
