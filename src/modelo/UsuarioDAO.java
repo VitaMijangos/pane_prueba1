@@ -92,4 +92,38 @@ public class UsuarioDAO {
             return ps.executeUpdate() > 0;
         }
     }
+    
+    /////VULNERABILIDAD
+    public Usuario validarUsuarioVulnerable(String nombreUsuario, String contrasena) {
+         Usuario usuario = null;
+
+         String contrasenaHash = Seguridad.generarHashSHA256(contrasena);
+
+         String sql = "SELECT * FROM usuario WHERE nombre_usuario = '" 
+                 + nombreUsuario + "' AND contrasena = '" 
+                 + contrasenaHash + "'";
+
+         System.out.println("SQL ejecutado: " + sql);
+
+         try (
+             Connection conexion = ConexionBD.obtenerConexion();
+             java.sql.Statement st = conexion.createStatement();
+             ResultSet rs = st.executeQuery(sql)
+         ) {
+             if (rs.next()) {
+                 usuario = new Usuario();
+                 usuario.setIdUsuario(rs.getInt("id_usuario"));
+                 usuario.setNombreUsuario(rs.getString("nombre_usuario"));
+                 usuario.setContrasena(rs.getString("contrasena"));
+                 usuario.setRol(rs.getString("rol"));
+             }
+
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+         return usuario;
+     } 
+     ///////////////
+    
 }
