@@ -43,7 +43,8 @@ public class LoginController implements ActionListener {
             return;
         }
 
-        Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario, contrasena);
+      Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario, contrasena);
+    
 
         if (usuario != null) {
             JOptionPane.showMessageDialog(vista, "Bienvenido, " + usuario.getNombreUsuario());

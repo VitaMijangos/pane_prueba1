@@ -27,7 +27,7 @@ public class UsuarioDAO {
             PreparedStatement ps = conexion.prepareStatement(VALIDAR_USUARIO)
         ) {
             ps.setString(1, nombreUsuario);
-            ps.setString(2, contrasena);
+            ps.setString(2, Seguridad.generarHashSHA256(contrasena)); //HASHEO DE CONTRASEÑA SHA256
 
             ResultSet rs = ps.executeQuery();
 
@@ -52,7 +52,7 @@ public class UsuarioDAO {
             PreparedStatement ps = conexion.prepareStatement(INSERTAR_USUARIO)
         ) {
             ps.setString(1, usuario.getNombreUsuario());
-            ps.setString(2, usuario.getContrasena());
+            ps.setString(2, Seguridad.generarHashSHA256(usuario.getContrasena())); //HASHEO DE CONTRASEÑA SHA256
             ps.setString(3, usuario.getRol());
 
             return ps.executeUpdate() > 0;

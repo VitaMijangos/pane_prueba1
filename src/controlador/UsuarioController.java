@@ -112,12 +112,12 @@ public class UsuarioController implements ActionListener {
         modelo.setRowCount(0);
 
         for (Usuario usuario : lista) {
-            modelo.addRow(new Object[]{
-                    usuario.getIdUsuario(),
-                    usuario.getNombreUsuario(),
-                    usuario.getContrasena(),
-                    usuario.getRol()
-            });
+        	modelo.addRow(new Object[]{
+        	        usuario.getIdUsuario(),
+        	        usuario.getNombreUsuario(),
+        	        "******",
+        	        usuario.getRol()
+        	});
         }
     }
 }
